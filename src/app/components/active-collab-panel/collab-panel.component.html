@@ -1,0 +1,29 @@
+<div class="collab-panel">
+  <div class="collaborators-list">
+    <app-syncfusion-listview
+      id="collab-list"
+      [dataSource]="listViewData"
+      [fields]="fields"
+      [template]="itemTemplate"
+      [showHeader]="false"
+      emptyMessage="No collaborators yet"
+      cssClass="e-list-template"
+    ></app-syncfusion-listview>
+  </div>
+</div>
+
+<!-- Item Template -->
+<ng-template #itemTemplate let-data>
+  <div class="e-list-wrapper collaborator-item">
+    <span
+      class="e-avatar e-avatar-circle e-avatar-small"
+      [style.backgroundColor]="data.avatarColor || '#185fa5'"
+      [style.color]="'#fff'"
+    >
+      {{ data.avatarText }}
+    </span>
+    <div class="collaborator-info">
+      <span class="e-list-item-header">{{ data.headerText }}</span>
+    </div>
+  </div>
+</ng-template>
