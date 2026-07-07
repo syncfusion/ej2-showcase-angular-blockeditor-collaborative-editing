@@ -1,0 +1,28 @@
+<div class="app">
+  <app-header></app-header>
+  <app-hero></app-hero>
+  
+  @if (isReady && collaborationSettings) {
+    <app-editor-workspace
+      [editorRef]="editorRef"
+      [roomId]="roomId"
+      [isConnected]="isConnected"
+      [currentUser]="currentUser"
+      [collaborators]="collaborators"
+      [blocks]="defaultBlocks"
+      [collaborationSettings]="collaborationSettings"
+      [snapshots]="snapshots"
+      [snapshotsLoading]="snapshotsLoading"
+      [inlineToolbarSettings]="inlineToolbarSettings"
+      [imageBlockSettings]="imageBlockSettings"
+      (restoreSnapshot)="onRestoreSnapshot($event)"
+      (deleteSnapshot)="onDeleteSnapshot($event)"
+      (renameSnapshot)="onRenameSnapshot($event)"
+      (clearAllSnapshots)="onClearAllSnapshots()"
+      (refreshVersions)="onRefreshVersions()"
+      (created)="onEditorCreated($event)"
+    ></app-editor-workspace>
+  } @else {
+    <app-loading-spinner text="Initializing collaboration..."></app-loading-spinner>
+  }
+</div>

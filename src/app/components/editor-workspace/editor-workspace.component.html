@@ -1,0 +1,45 @@
+<section class="editor-workspace">
+  <div>
+    <app-editor-container
+      [editorRef]="editorRef"
+      [blocks]="blocks"
+      [users]="allUsers"
+      [currentUserId]="currentUser.id"
+      [collaborationSettings]="collaborationSettings"
+      [collaboratorCount]="collaboratorCount"
+      [activePanel]="activePanel"
+      [roomId]="roomId"
+      [isConnected]="isConnected"
+      [inlineToolbarSettings]="inlineToolbarSettings"
+      [imageBlockSettings]="imageBlockSettings"
+      (panelToggle)="handleTogglePanel($event)"
+      (created)="onEditorCreated($event)"
+      (editorInstanceReady)="onEditorInstanceReady($event)"
+    ></app-editor-container>
+
+    <!-- Syncfusion Sidebar with unified content -->
+    <app-syncfusion-sidebar
+      [target]="sidebarTarget"
+      [showBackdrop]="false"
+      [isOpen]="activePanel !== null"
+      position="Right"
+      (sidebarClose)="handleClosePanel()"
+    >
+      @if (activePanel) {
+        <app-sidebar-content
+          [mode]="activePanel === 'collab' ? 'collaborators' : 'versions'"
+          [collaborators]="collaborators"
+          [currentUser]="currentUser"
+          [editorRef]="editorRef"
+          [snapshots]="snapshots"
+          [isLoading]="snapshotsLoading"
+          (close)="handleClosePanel()"
+          (restore)="onRestoreSnapshot($event)"
+          (delete)="onDeleteSnapshot($event)"
+          (rename)="onRenameSnapshot($event)"
+          (clearAll)="onClearAllSnapshots()"
+        ></app-sidebar-content>
+      }
+    </app-syncfusion-sidebar>
+  </div>
+</section>

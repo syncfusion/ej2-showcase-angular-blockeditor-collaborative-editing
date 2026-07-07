@@ -1,0 +1,48 @@
+<div class="sidebar-content-wrapper">
+  <!-- Unified Header -->
+  <div class="sidebar-header">
+    <h3 class="sidebar-title">{{ getHeaderTitle() }}</h3>
+    <div class="sidebar-header-actions">
+      @if (hasHeaderActions()) {
+        <app-syncfusion-button
+          cssClass="e-small"
+          [disabled]="isClearing || isLoading"
+          [title]="'Delete all snapshots'"
+          [ariaLabel]="'Clear all snapshots'"
+          (clicked)="handleClearAll()"
+        >
+          Delete All
+        </app-syncfusion-button>
+      }
+      @if (close.observed) {
+        <app-syncfusion-button
+          cssClass="e-small"
+          [ariaLabel]="'Close sidebar'"
+          [title]="'Close'"
+          (clicked)="onClose()"
+        >
+          ×
+        </app-syncfusion-button>
+      }
+    </div>
+  </div>
+
+  <!-- Mode-specific Content using Syncfusion ListView -->
+  <div class="sidebar-content">
+    @if (mode === 'collaborators') {
+      <div style="height: 100%;" app-collab-panel
+        [collaborators]="collaborators"
+        [currentUser]="currentUser"
+      ></div>
+    } @else {
+      <div style="height: 100%;" app-version-history-list
+        [editorRef]="editorRef"
+        [snapshots]="snapshots"
+        [isLoading]="isLoading"
+        (restore)="onRestore($event)"
+        (delete)="onDelete($event)"
+        (rename)="onRename($event)"
+      ></div>
+    }
+  </div>
+</div>

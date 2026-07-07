@@ -1,0 +1,20 @@
+<label for="collab-url" class="toolbar-label">⚡ Share Collaboration URL</label>
+<div class="room-url-container">
+  <ejs-textbox
+    id="collab-url"
+    type="text"
+    width="320px"
+    [readonly]="true"
+    cssClass="e-small"
+    [value]="collaborationUrl"
+    [attr.aria-label]="'Collaboration room URL'"
+  ></ejs-textbox>
+  <button
+    ejs-button
+    cssClass="copy-button e-small"
+    (click)="handleCopyLink()"
+    [title]="'Copy collaboration link'"
+    [attr.aria-label]="'Copy collaboration link'"
+    [iconCss]="copied ? 'e-icons e-check' : 'e-icons e-copy'"
+  ></button>
+</div>

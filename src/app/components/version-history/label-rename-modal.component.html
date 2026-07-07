@@ -1,0 +1,49 @@
+@if (visible) {
+  <div class="rename-dialog-overlay">
+    <div class="rename-dialog" role="dialog" [attr.aria-modal]="true">
+      
+      <div class="rename-dialog-header">
+        <span>{{ title }}</span>
+        <button
+          ejs-button
+          cssClass="e-small"
+          (click)="onCancel()"
+          [attr.aria-label]="'Close'"
+          type="button"
+        >
+          ×
+        </button>
+      </div>
+
+      <div class="rename-dialog-body">
+        <ejs-textbox
+          type="text"
+          [value]="localValue"
+          (change)="onValueChange($event)"
+          (keydown)="onKeyDown($event)"
+          placeholder="Enter snapshot label"
+          cssClass="rename-input-field"
+        ></ejs-textbox>
+      </div>
+
+      <div class="rename-dialog-footer">
+        <button
+          ejs-button
+          cssClass="e-small"
+          (click)="onCancel()"
+        >
+          Cancel
+        </button>
+        <button
+          ejs-button
+          cssClass="e-small"
+          [isPrimary]="true"
+          (click)="onSave()"
+        >
+          Save
+        </button>
+      </div>
+
+    </div>
+  </div>
+}

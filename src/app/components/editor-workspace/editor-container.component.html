@@ -1,0 +1,57 @@
+<div class="editor-container">
+  <div class="toolbar-area">
+    <ejs-toolbar cssClass="editor-toolbar">
+      <e-items>
+        <!-- Left section: Collaboration URL -->
+        <e-item align="Left" type="Input">
+          <ng-template #template>
+            <div class="collaboration-toolbar-wrapper">
+              <div app-collaboration-option class="toolbar-section-left"
+                  [roomId]="roomId"
+                  [isConnected]="isConnected">
+              </div>
+              <div app-connection-status class="toolbar-section-right"
+                [isConnected]="isConnected">
+              </div>
+            </div>
+          </ng-template>
+        </e-item>
+
+        <!-- Right section: Export, Collaborators count, Panel toggle -->
+        <e-item align="Right" type="Input">
+          <ng-template #template>
+            <div class="toolbar-right">
+              <app-syncfusion-button iconCss="e-icons e-people" cssClass="e-small e-info">
+                {{ collaboratorCount }} {{ collaboratorCount === 1 ? 'person' : 'people' }}
+              </app-syncfusion-button>
+              
+              <app-export-option
+                [exportMenuItems]="exportMenuItems"
+                (export)="handleExport($event)"
+              ></app-export-option>
+              
+              <app-toggle-option
+                [panelMenuItems]="panelMenuItems"
+                (toggle)="handlePanelToggle($event)"
+              ></app-toggle-option>
+            </div>
+          </ng-template>
+        </e-item>
+      </e-items>
+    </ejs-toolbar>
+  </div>
+
+  <div class="editor-area" app-syncfusion-block-editor
+      id="block-editor"
+      height="600px"
+      width="auto"
+      [blocks]="blocks"
+      [users]="users"
+      [currentUserId]="currentUserId"
+      [collaborationSettings]="collaborationSettings"
+      [inlineToolbarSettings]="inlineToolbarSettings"
+      [imageBlockSettings]="imageBlockSettings"
+      (created)="onEditorCreated($event)"
+    >
+  </div>
+</div>

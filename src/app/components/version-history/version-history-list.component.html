@@ -1,0 +1,56 @@
+<app-syncfusion-listview
+  id="version-history-list"
+  [dataSource]="listViewData"
+  [fields]="fields"
+  [template]="itemTemplate"
+  [groupTemplate]="groupTemplate"
+  [showHeader]="false"
+  [isLoading]="isLoading"
+  emptyMessage="No versions yet. Create a snapshot to save your work."
+  cssClass="e-list-template"
+></app-syncfusion-listview>
+
+<!-- Item Template -->
+<ng-template #itemTemplate let-data>
+  <div class="e-list-wrapper version-item-wrapper">
+    <div class="version-content">
+      <div class="version-label">
+        <h4 class="version-title">{{ data.headerText }}</h4>
+        @if (data.isAutoLabel) {
+          <span class="auto-badge">[auto]</span>
+        }
+      </div>
+      <p class="version-meta">
+        {{ data.userName }}
+        @if (data.label) {
+          <span> · {{ data.timestamp }}</span>
+        }
+      </p>
+    </div>
+    <div class="version-actions">
+      <button ejs-dropdownbutton
+        [items]="menuItems"
+        (select)="handleMenuAction(data.id, $event)"
+        cssClass="e-caret-hide e-small e-flat"
+        iconCss="e-icons e-more-vertical-2"
+        aria-label="Version actions">
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<!-- Group Template -->
+<ng-template #groupTemplate let-data>
+  <div class="e-list-group-header">
+    <span class="group-title">{{ data.items[0].dateGroup }}</span>
+  </div>
+</ng-template>
+
+<!-- Rename Dialog -->
+<app-label-rename-modal
+  [visible]="showRenameDialog"
+  [value]="newLabel"
+  (valueChange)="onLabelChange($event)"
+  (save)="onRenameSave()"
+  (cancel)="onRenameCancel()"
+></app-label-rename-modal>
