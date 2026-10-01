@@ -35,6 +35,7 @@
     "@syncfusion/ej2-angular-popups": "*",
     "@syncfusion/ej2-angular-notifications": "*",
     "@syncfusion/ej2-angular-layouts": "*",
+    "@syncfusion/ej2-tailwind3-theme": "*",
     "yjs": "^13.6.8",
     "y-websocket": "^2.0.4",
     "y-indexeddb": "^9.0.12",
